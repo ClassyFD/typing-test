@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Typing from './Components/Typing';
+import Typing from './Components/Typing/Typing';
 import './App.css';
 
 class App extends Component {

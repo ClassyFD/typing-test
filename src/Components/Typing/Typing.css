@@ -1,0 +1,44 @@
+.Typing {
+  width: 800px;
+  background: #D31027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #EA384D, #D31027);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #EA384D, #D31027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.typing-header-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 15px auto 25px;
+}
+.typing-header-section h1 {
+  margin: 0;
+}
+.typing-line-section {
+  height: 250px;
+  width: 100%;
+  margin: 0px auto;
+  border-radius: 10px;
+  background: white;
+}
+.typing-word-section {
+  background: white;
+  height: 50px;
+  width: 100%;
+  margin: 11px auto 0px;
+  border-radius: 10px;
+}
+.typing-instructions-section {
+  background: white;
+  height: 150px;
+  width: 100%;
+  margin: 11px auto 0px;
+  border-radius: 10px;
+}
+.typing-instructions-section h1 {
+  display: flex;
+  justify-content: center;
+}
