@@ -14,14 +14,57 @@ class Typing extends Component {
   }
 
   componentDidMount() {
-    this.generateLine(3);
+    this.generateLine(2);
   }
 
   generateLine = (amount) => {
-    
+    const { words } = this.props;
+    const lineAmount = amount || 1;
+    let wordArr = [];
+    let lineLength = 0;
+
+    while (lineLength < 48) {
+      const randomIndex = Math.floor(Math.random() * words.length);
+      const randomWord = words[randomIndex];
+      if ((randomWord.length + 1 + lineLength) < 51) {
+        lineLength += (randomWord.length + 1);
+        wordArr.push(randomWord);
+        console.log(lineLength)
+      } else {
+        break;
+      }
+    }
+    this.setState({
+      previousLine: this.state.currentLine,
+      currentLine: this.state.nextLine,
+      nextLine: wordArr,
+    }, ()=>{
+      if (lineAmount > 1) {
+        this.generateLine(lineAmount - 1);
+      }
+    })
   }
 
   render() {
+    let previousLine = '\u00A0';
+    let currentLine = [];
+    let nextLine = [];
+    if (this.state.previousLine) {
+      previousLine = this.state.previousLine.map((cEl, cIn)=>{
+        return cEl + (cIn + 1 === this.state.previousLine.length? '' : ' ');
+      })
+    }
+    if (this.state.currentLine) {
+      currentLine = this.state.currentLine.map((cEl, cIn)=>{
+        return <span className={`current-line-span-${cIn}`}>{cEl}{(cIn + 1 === this.state.currentLine.length? '' : ' ')}</span>;
+      })
+    }
+    if (this.state.nextLine) {
+      nextLine = this.state.nextLine.map((cEl, cIn)=>{
+        return cEl + (cIn + 1 === this.state.nextLine.length? '' : ' ');
+      })
+    }
+    
     return (
       <main className="Typing">
         <section className="typing-header-section">
@@ -29,13 +72,13 @@ class Typing extends Component {
         </section>
         <section className="typing-line-section">
           <div className="typing-line typing-line-previous">
-          asdfj asdfj asdfj asdfj adsfj asdfj adsfj adfsj
+            {previousLine}
           </div>
           <div className="typing-line typing-line-current">
-          asdf
+            {currentLine}
           </div>
           <div className="typing-line typing-line-next">
-          asdf
+            {nextLine}
           </div>
         </section>
         <section className="typing-word-section">

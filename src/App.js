@@ -22,10 +22,10 @@ class App extends Component {
       "no","way","could","people","my","than","first","water","been","call",
       "who","oil","its","now","find","long","down","day","did","get","come",
       "made","may","part","sometimes", "develop", "working", "question", 
-      "remember", "words", "contain", "already", "apply", "attribute", 
-      "browse", "bug", "class", "cookies", "convert", "crawl", "domain", "field", 
-      "firewall", "framework", "react", "navigate", "open", "close", "redirect", 
-      "resolve", "serve", "ready",
+      "remember", "words", "contain", "already", "apply", "attack", 
+      "browse", "animal", "class", "cookies", "convert", "crawled", "domain", "field", 
+      "firework", "framed", "reaction", "navigate", "open", "close", "comment", 
+      "contest", "serve", "ready",
     ];
     this.setState({
       wordArr,
