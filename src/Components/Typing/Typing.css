@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "avenir-medium";
+  src: url('../../Assets/AvenirLTStd-Medium.woff') format("woff");
+}
 .Typing {
   width: 800px;
   background: #D31027;  /* fallback for old browsers */
@@ -7,6 +11,8 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .typing-header-section {
   width: 100%;
@@ -18,11 +24,19 @@
   margin: 0;
 }
 .typing-line-section {
-  height: 250px;
+  height: 200px;
   width: 100%;
   margin: 0px auto;
   border-radius: 10px;
   background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.typing-line {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 36px;
 }
 .typing-word-section {
   background: white;
@@ -30,15 +44,34 @@
   width: 100%;
   margin: 11px auto 0px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 }
-.typing-instructions-section {
+.typing-word-section input {
+  height: 70%;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 100%;
+  border: none;
+  font-size: 24px;
+  text-align: center;
+  font-family: avenir;
+  font-weight: bold;
+}
+.typing-instructions-section, .typing-info-section {
   background: white;
-  height: 150px;
   width: 100%;
   margin: 11px auto 0px;
   border-radius: 10px;
 }
-.typing-instructions-section h1 {
+.typing-instructions-section h1, .typing-info-section h1 {
   display: flex;
   justify-content: center;
+}
+.typing-info-section h2 {
+  margin-left: 10px;
+  font-size: 18px;
+}
+.typing-info-section p {
+  margin-left: 30px;
 }

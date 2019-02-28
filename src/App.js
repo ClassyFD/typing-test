@@ -13,7 +13,7 @@ class App extends Component {
   componentWillMount = () => {
     const wordArr = [
       "the","of","and","anytime","to","in","is","you","that","it","he","was",
-      "for","on","are","as","with","his","they","I","at","be","this","have",
+      "for","on","are","as","with","his","they","at","be","this","have",
       "from","or","one","had","by","word","but","not","what","all","were",
       "we","when","your","can","said","there","use","an","each","which",
       "she","do","how","their","if","will","up","other","about","out","many",
@@ -21,10 +21,10 @@ class App extends Component {
       "into","time","has","look","two","more","write","go","see","number",
       "no","way","could","people","my","than","first","water","been","call",
       "who","oil","its","now","find","long","down","day","did","get","come",
-      "made","may","part","sometimes", "development", "working", "question", 
-      "remember", "words", "contain", "already", "application", "attribute", 
+      "made","may","part","sometimes", "develop", "working", "question", 
+      "remember", "words", "contain", "already", "apply", "attribute", 
       "browse", "bug", "class", "cookies", "convert", "crawl", "domain", "field", 
-      "firewall", "framework", "react", "navigation", "open", "close", "redirect", 
+      "firewall", "framework", "react", "navigate", "open", "close", "redirect", 
       "resolve", "serve", "ready",
     ];
     this.setState({
