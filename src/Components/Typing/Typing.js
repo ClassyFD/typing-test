@@ -6,7 +6,7 @@ class Typing extends Component {
     super(props)
     this.state = {
       previousWord: undefined,
-      currentWord: undefined,
+      currentWord: 0,
       previousLine: undefined,
       currentLine: undefined,
       nextLine: undefined,
@@ -14,10 +14,10 @@ class Typing extends Component {
   }
 
   componentDidMount() {
-    this.generateLine(2);
+    this.generateLine(2, ()=>this.updateWord('start'));
   }
 
-  generateLine = (amount) => {
+  generateLine = (amount, cb) => {
     const { words } = this.props;
     const lineAmount = amount || 1;
     let wordArr = [];
@@ -29,7 +29,6 @@ class Typing extends Component {
       if ((randomWord.length + 1 + lineLength) < 51) {
         lineLength += (randomWord.length + 1);
         wordArr.push(randomWord);
-        console.log(lineLength)
       } else {
         break;
       }
@@ -39,16 +38,28 @@ class Typing extends Component {
       currentLine: this.state.nextLine,
       nextLine: wordArr,
     }, ()=>{
-      if (lineAmount > 1) {
-        this.generateLine(lineAmount - 1);
+      if (cb && lineAmount > 1) {
+        this.generateLine(lineAmount - 1, cb)
+      } else if (lineAmount > 1) {
+        this.generateLine(lineAmount - 1)
+      } else if (cb) {
+        cb();
       }
     })
+  }
+
+  updateWord = (type) => { 
+    const currentWordRef = this.currentWordRef;
+    console.log(type)
+    console.log(currentWordRef);
+    console.log(document.getElementsByClassName('current-line-span')[0].getBoundingClientRect());
   }
 
   render() {
     let previousLine = '\u00A0';
     let currentLine = [];
     let nextLine = [];
+    let currentWord = '';
     if (this.state.previousLine) {
       previousLine = this.state.previousLine.map((cEl, cIn)=>{
         return cEl + (cIn + 1 === this.state.previousLine.length? '' : ' ');
@@ -56,13 +67,16 @@ class Typing extends Component {
     }
     if (this.state.currentLine) {
       currentLine = this.state.currentLine.map((cEl, cIn)=>{
-        return <span className={`current-line-span-${cIn}`}>{cEl}{(cIn + 1 === this.state.currentLine.length? '' : ' ')}</span>;
+        return <span key={`current-line-span-key-${cIn}`} className={`current-line-span current-line-span-${cIn}`}>{cEl}{(cIn + 1 === this.state.currentLine.length? '' : ' ')}</span>;
       })
     }
     if (this.state.nextLine) {
       nextLine = this.state.nextLine.map((cEl, cIn)=>{
         return cEl + (cIn + 1 === this.state.nextLine.length? '' : ' ');
       })
+    }
+    if (this.state.currentLine && this.state.currentLine[this.state.currentWord]) {
+      currentWord = this.state.currentLine[this.state.currentWord];
     }
     
     return (
@@ -76,13 +90,16 @@ class Typing extends Component {
           </div>
           <div className="typing-line typing-line-current">
             {currentLine}
+            <span className="typing-highlight">
+              <p ref={e=>this.currentWordRef = e}>{currentWord}</p>
+            </span>
           </div>
           <div className="typing-line typing-line-next">
             {nextLine}
           </div>
         </section>
         <section className="typing-word-section">
-          <input></input>
+          <input placeholder="Type here"></input>
         </section>
         <section className="typing-instructions-section">
           <h1>Instructions</h1>
