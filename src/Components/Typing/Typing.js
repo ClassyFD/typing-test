@@ -13,13 +13,15 @@ class Typing extends Component {
     }
   }
 
+  componentWillMount() {
+    this.generateLine('mounting');
+  }
   componentDidMount() {
-    this.generateLine(2, ()=>this.updateWord('start'));
+    this.updateWord('start');
   }
 
-  generateLine = (amount, cb) => {
+  generateLine = (mounting) => {
     const { words } = this.props;
-    const lineAmount = amount || 1;
     let wordArr = [];
     let lineLength = 0;
 
@@ -33,26 +35,41 @@ class Typing extends Component {
         break;
       }
     }
-    this.setState({
-      previousLine: this.state.currentLine,
-      currentLine: this.state.nextLine,
-      nextLine: wordArr,
-    }, ()=>{
-      if (cb && lineAmount > 1) {
-        this.generateLine(lineAmount - 1, cb)
-      } else if (lineAmount > 1) {
-        this.generateLine(lineAmount - 1)
-      } else if (cb) {
-        cb();
+
+    if (mounting) {
+      let wordArrNext = [];
+      let lineLengthNext = 0;
+      while (lineLengthNext < 48) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        const randomWord = words[randomIndex];
+        if ((randomWord.length + 1 + lineLengthNext) < 51) {
+          lineLengthNext += (randomWord.length + 1);
+          wordArrNext.push(randomWord);
+        } else {
+          break;
+        }
       }
-    })
+      this.setState({
+        previousLine: this.state.currentLine,
+        currentLine: wordArr,
+        nextLine: wordArrNext,
+      })
+    } else {
+      this.setState({
+        previousLine: this.state.currentLine,
+        currentLine: this.state.nextLine,
+        nextLine: wordArr,
+      })
+    }
   }
 
   updateWord = (type) => { 
     const currentWordRef = this.currentWordRef;
     console.log(type)
     console.log(currentWordRef);
-    console.log(document.getElementsByClassName('current-line-span')[0].getBoundingClientRect());
+    setTimeout(() => {
+      console.log(document.getElementsByClassName('current-line-span')[0].offsetLeft);
+    }, 100);
   }
 
   render() {
