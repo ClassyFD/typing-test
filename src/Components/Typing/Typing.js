@@ -17,7 +17,9 @@ class Typing extends Component {
     this.generateLine('mounting');
   }
   componentDidMount() {
-    this.updateWord('start');
+    setTimeout(() => {
+      this.updateSpan('start');
+    }, 200);
   }
 
   generateLine = (mounting) => {
@@ -63,13 +65,11 @@ class Typing extends Component {
     }
   }
 
-  updateWord = (type) => { 
-    const currentWordRef = this.currentWordRef;
-    console.log(type)
-    console.log(currentWordRef);
-    setTimeout(() => {
-      console.log(document.getElementsByClassName('current-line-span')[0].offsetLeft);
-    }, 100);
+  updateSpan = (type) => { 
+    const offset = document.getElementsByClassName('current-line-span')[0].offsetLeft;
+    const span = document.getElementsByClassName('typing-highlight')[0];
+    span.style.display = 'flex';
+    span.style.left = `${offset - 5}px`;
   }
 
   render() {
@@ -106,10 +106,10 @@ class Typing extends Component {
             {previousLine}
           </div>
           <div className="typing-line typing-line-current">
-            {currentLine}
             <span className="typing-highlight">
-              <p ref={e=>this.currentWordRef = e}>{currentWord}</p>
+              <p>{currentWord}</p>
             </span>
+            {currentLine}
           </div>
           <div className="typing-line typing-line-next">
             {nextLine}
